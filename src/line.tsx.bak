@@ -1,0 +1,36 @@
+import {
+    Environment,
+    useEnvironment,
+  } from "@react-three/drei";
+  import * as THREE from "three";
+  import "./App.css";
+
+function Line({ x }: { x: number }) {
+    const envMap = useEnvironment({
+        files: ['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png'],
+        //path: '/cube/pisa/' 
+        //path: 'modern buildings/' 
+        path: '/cube/Bridge2/'
+    });
+
+    return (
+      <line>
+        <bufferGeometry
+          attach="geometry"
+          attributes-position={new THREE.Float32BufferAttribute(
+            [
+              x, -1.39, -5, // Agora bem colado na fretboard
+              x, -1.39, 5,  
+            ],
+            3
+          )}
+        />
+        <Environment map={envMap} />
+        <mesh  position={[0, -1.5, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+            <lineBasicMaterial attach="mesh" color="white" linewidth={2} />
+        </mesh>
+      </line>
+    );
+  }
+
+  export default { LineBak };
